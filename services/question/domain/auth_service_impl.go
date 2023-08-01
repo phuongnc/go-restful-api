@@ -40,9 +40,6 @@ func (a *authDomainImpl) Login(ctx context.Context, user *domain.User) (*domain.
 		}
 		user.Id = uuid.New().String()
 		user.Password = passwordHash
-		user.IsActive = true
-		user.IsDeleted = false
-		user.NeedUpdatePassword = false
 		user.CreatedAt = time.Now()
 
 		err = a.userRepo.InsertUser(ctx, user)

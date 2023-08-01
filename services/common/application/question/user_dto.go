@@ -16,15 +16,12 @@ type LoginReq struct {
 }
 
 type UserRes struct {
-	Id                 string         `json:"id"`
-	Name               string         `json:"name"`
-	Email              string         `json:"email"`
-	IsFullVersion      bool           `json:"is_full_version"`
-	IsFullVersionAll   bool           `json:"is_full_version_all"`
-	NeedUpdatePassword bool           `json:"need_update_password"`
-	Avatar             string         `json:"avatar"`
-	NeedUpdateInfo     bool           `json:"need_update_info"`
-	AccessToken        AccessTokenRes `json:"access_token"`
+	Id             string         `json:"id"`
+	Name           string         `json:"name"`
+	Email          string         `json:"email"`
+	Avatar         string         `json:"avatar"`
+	NeedUpdateInfo bool           `json:"need_update_info"`
+	AccessToken    AccessTokenRes `json:"access_token"`
 }
 
 type ShortUserRes struct {
@@ -64,12 +61,10 @@ func MapUserFromLoginReqDto(loginDto *LoginReq) *commonDomain.User {
 
 func MapUserToLoginResDto(model *commonDomain.User) *UserRes {
 	loginRes := &UserRes{
-		Id:                 model.Id,
-		Email:              model.Email,
-		Name:               model.Name,
-		Avatar:             model.Avatar,
-		NeedUpdatePassword: model.NeedUpdatePassword,
-		NeedUpdateInfo:     false,
+		Id:     model.Id,
+		Email:  model.Email,
+		Name:   model.Name,
+		Avatar: model.Avatar,
 	}
 	if model.Name == "" {
 		loginRes.NeedUpdateInfo = true
@@ -106,15 +101,10 @@ func MapUserToResDto(model *commonDomain.User) *UserRes {
 		return nil
 	}
 	userRes := &UserRes{
-		Id:                 model.Id,
-		Email:              model.Email,
-		Name:               model.Name,
-		Avatar:             model.Avatar,
-		NeedUpdatePassword: model.NeedUpdatePassword,
-		NeedUpdateInfo:     false,
-	}
-	if model.Name == "" {
-		userRes.NeedUpdateInfo = true
+		Id:     model.Id,
+		Email:  model.Email,
+		Name:   model.Name,
+		Avatar: model.Avatar,
 	}
 	return userRes
 }

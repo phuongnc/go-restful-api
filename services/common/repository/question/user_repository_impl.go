@@ -11,17 +11,14 @@ import (
 )
 
 type userGorm struct {
-	Id                 commonDomain.UUID `gorm:"type:uuid;primary_key"`
-	Password           string
-	Email              string
-	Name               string
-	Age                int
-	Avatar             string
-	IsActive           bool
-	IsDeleted          bool
-	NeedUpdatePassword bool
-	CreatedAt          time.Time
-	UpdatedAt          time.Time
+	Id        commonDomain.UUID `gorm:"type:uuid;primary_key"`
+	Password  string
+	Email     string
+	Name      string
+	Age       int
+	Avatar    string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 func (d *userGorm) TableName() string {

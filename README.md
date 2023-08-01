@@ -12,18 +12,28 @@ Project struct build in monolithic architecture but open for microservices archi
 - Some popular libraries (viper config, go-migrate, jwt-go, govalidator, logrus, samber-lodash, ...).
 
 ## How to use
-Clone this repository to your local machine. Ensure that you have Go environment and Postgresql database running (update the information config file app.yml)
+Clone this repository to your local machine.
+1. Ensure that you have Go environment
+2. Postgresql database running (update the information config file app.yml)
 
-### Run from source code
- Go to root project and run:
+For creating docker Postgresql, from root project run script:
 ```
-go run services/question/main.go
+docker-compose -f docker/docker-compose.local.yml up -d
+```
+For init tables, from root project run migration script:
+```
+ENV=local make migrate-up
+```
+### Run from source code
+Go to root project and run:
+```
+cd services/question/ && go run main.go
 ```
 ### Run by docker
 From root project run the script:
 ```
-docker build -t backend-service:lastest --build-arg APPCONFIG=app.yml -f ./services/question/Dockerfile .
-docker run -d -p 3000:3000 backend-service:lastest
+docker build -t sample-restful-api:lastest --build-arg APPCONFIG=app.yml -f ./services/question/Dockerfile .
+docker run -d -p 3000:3000 sample-restful-api:lastest
 ```
 
 ## Questions / Feedbacks / Bugs
