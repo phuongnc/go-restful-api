@@ -25,7 +25,7 @@ func NewAuthDomain(logger logger.Logger, userRepo domain.UserRepository) domain.
 }
 
 func (a *authDomainImpl) Login(ctx context.Context, user *domain.User) (*domain.User, error) {
-	a.logger.DebugCtx(ctx, "Get user by email and application_id")
+	a.logger.DebugCtx(ctx, "Get user by email")
 	result, err := a.userRepo.Query(ctx).ByEmail(user.Email).Result()
 	if err != nil {
 		a.logger.ErrorCtx(ctx, err, "Get user by email fail")

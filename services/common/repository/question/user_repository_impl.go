@@ -75,7 +75,7 @@ func (u *userQuery) WithPage(offset, limit int32) commonDomain.UserQuery {
 
 func (u *userQuery) Result() (*commonDomain.User, error) {
 	result := userGorm{}
-	err := u.db.Where("is_deleted = ?", false).First(&result).Error
+	err := u.db.First(&result).Error
 	if err != nil {
 		if gorm.IsRecordNotFoundError(err) {
 			return nil, nil
@@ -87,7 +87,7 @@ func (u *userQuery) Result() (*commonDomain.User, error) {
 
 func (u *userQuery) ResultList() ([]*commonDomain.User, error) {
 	var result []*userGorm
-	err := u.db.Where("is_deleted = ?", false).Find(&result).Error
+	err := u.db.Find(&result).Error
 	if err != nil {
 		return nil, err
 	}

@@ -32,13 +32,6 @@ func NewAuthHandler(
 }
 
 func (h *authHandler) Login(c *gin.Context) {
-	clientSessionPublic := c.Request.Header.Get("Client-Session")
-	if clientSessionPublic == "" {
-		h.logger.Error(errors.New("Client-Session Invalid"))
-		h.baseHandler.BadRequest(c, errors.New("Invalid request"))
-		return
-	}
-
 	loginReq := &commonApp.LoginReq{}
 	h.baseHandler.BindToDto(c, loginReq)
 

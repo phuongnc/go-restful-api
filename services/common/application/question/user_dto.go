@@ -16,12 +16,11 @@ type LoginReq struct {
 }
 
 type UserRes struct {
-	Id             string         `json:"id"`
-	Name           string         `json:"name"`
-	Email          string         `json:"email"`
-	Avatar         string         `json:"avatar"`
-	NeedUpdateInfo bool           `json:"need_update_info"`
-	AccessToken    AccessTokenRes `json:"access_token"`
+	Id          string         `json:"id"`
+	Name        string         `json:"name"`
+	Email       string         `json:"email"`
+	Avatar      string         `json:"avatar"`
+	AccessToken AccessTokenRes `json:"access_token"`
 }
 
 type ShortUserRes struct {
@@ -65,9 +64,6 @@ func MapUserToLoginResDto(model *commonDomain.User) *UserRes {
 		Email:  model.Email,
 		Name:   model.Name,
 		Avatar: model.Avatar,
-	}
-	if model.Name == "" {
-		loginRes.NeedUpdateInfo = true
 	}
 	if model.UserSession != nil {
 		loginRes.AccessToken = AccessTokenRes{

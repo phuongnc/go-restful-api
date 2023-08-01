@@ -35,7 +35,37 @@ From root project run the script:
 docker build -t sample-restful-api:lastest --build-arg APPCONFIG=app.yml -f ./services/question/Dockerfile .
 docker run -d -p 3000:3000 sample-restful-api:lastest
 ```
+## Sample request
 
+Login/register api request:
+```
+curl --location 'http://localhost:3000/v1/auth/login' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "email": "nguyencongphuong@gmail.com",
+    "password": "12345678"
+}'
+```
+
+Response:
+
+```json
+{
+    "data": {
+        "id": "2d31eff9-b9c1-4422-b1b0-003acd2f58cb",
+        "name": "",
+        "email": "nguyencongphuong@gmail.com",
+        "avatar": "",
+        "access_token": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMmQzMWVmZjktYjljMS00NDIyLWIxYjAtMDAzYWNkMmY1OGNiIiwiZW1haWwiOiJuZ3V5ZW5jb25ncGh1b25nQGdtYWlsLmNvbSIsImV4cCI6MTY5MzQ2MTAyMSwiaXNzIjoiU21hcnRLaWQtRWR1Y2F0aW9uIn0.YRDUxV5eapw-WqMuce9Vbp7EnOy_5N2faycV02n1Mac",
+            "expired_at": "2023-08-31T12:50:21.978723+07:00"
+        }
+    },
+    "error": null,
+    "message": "Success",
+    "success": true
+}
+```
 ## Questions / Feedbacks / Bugs
 Feel free to reach out to me if you have any questions or feedback on how my code can be improved.
 My email: nguyencongphuong@gmail.com
