@@ -1,0 +1,43 @@
+# http server config
+http:
+  host: localhost
+  port: 3000
+  ssl: false
+
+# -------------------------------
+# logger config
+logger:
+  # output can select 'stdout' value or 'file' value. you should must set 'file' key when file value output file.
+  output: stdout
+  # path to log file, this only effect when output is set to 'file'
+  file: /var/log/credify.one/services.log
+  # supported level: fatal, error, warn, info, debug, trace
+  level: debug
+  # supported format: text, json
+  format: text
+  # disable colors when logging output is stdout, default is false
+  disable_colors: false
+  # show the log with the line of code, where is the logger has been called
+  expecting_line: true
+  # record the grpc payload
+  request_payload: true
+
+# -------------------------------
+# database connection config
+database:
+  dbms: postgres
+  host: localhost
+  port: 5432
+  ssl: false
+  name: db-name
+  user: db-user
+  password: db-password
+  logmode: false
+  schema: public
+  max_conn: 5
+  max_idle_conn: 5
+
+# -------------------------------
+# storage url config
+storage:
+  url: file_storage_url

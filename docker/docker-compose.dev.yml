@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  smartkid-db:
+    image: postgres:14.1-alpine
+    container_name: smartkid-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=smartkid-db
+      - POSTGRES_USER=smartkid-user
+      - POSTGRES_PASSWORD=Smartkid-db-dev-env@2023
+    volumes: 
+      - smartkid-db:/var/lib/postgresql/data
+    
+volumes:
+  smartkid-db:
+    driver: local
+
+networks: 
+  default: 
+    external: 
+      name: smartkid-docker-network 

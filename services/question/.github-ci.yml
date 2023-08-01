@@ -1,0 +1,97 @@
+.question-vars:
+  variables:
+    PROJECT_PATH: services/question
+
+.question-service-build:
+  extends:
+    - .question-vars
+    - .service-build
+  variables:
+    PROJECT_NAME: question
+    DOCKER_FILE: services/question/Dockerfile
+
+.dop-service-tag:
+  extends:
+    - .dop-vars
+    - .service-tag
+  variables:
+    PROJECT_NAME: question
+
+.dop-spinnaker:
+  extends:
+    - .dop-vars
+    - .spinnaker
+  variables:
+    PROJECT_NAME: dop
+#-----------------dev-----------------#
+dop-service-build-dev:
+  extends:
+    - .dev-env
+    - .dop-vars
+    - .service-build-base
+  variables:
+    PROJECT_NAME: dop
+    DOCKER_FILE: services/dop/Dockerfile
+
+dop-spinnaker-dev:
+  extends:
+    - .dev-env
+    - .dop-spinnaker
+  needs:
+    - dop-service-build-dev
+    - services-flyway-build-dev
+
+scan-docker-image-dop:
+  extends:
+    - .dev-env
+    - .dop-vars
+    - .scan-image
+  variables:
+    PROJECT_NAME: dop
+    DOCKER_IMAGE: "$DOCKER_REGISTRY/$PROJECT_NAME:$IMAGE_TAG"
+  allow_failure: true
+#-----------------sit-----------------#
+dop-service-build-master:
+  extends:
+    - .sit-env
+    - .dop-service-build
+
+dop-service-tag-sit:
+  extends:
+    - .sit-env
+    - .dop-service-tag
+
+dop-spinnaker-sit:
+  extends:
+    - .sit-env
+    - .dop-spinnaker
+#-----------------uat-----------------#
+dop-service-tag-uat:
+  extends:
+    - .uat-env
+    - .dop-service-tag
+
+dop-spinnaker-uat:
+  extends:
+    - .uat-env
+    - .dop-spinnaker
+#-----------------sbx-----------------#
+dop-service-tag-sbx:
+  extends:
+    - .sbx-env
+    - .dop-service-tag
+
+dop-spinnaker-sbx:
+  extends:
+    - .sbx-env
+    - .dop-spinnaker
+#-----------------prd-----------------#
+dop-service-tag-prd:
+  extends:
+    - .prd-env
+    - .dop-service-tag
+
+dop-spinnaker-prd:
+  extends:
+    - .prd-env
+    - .dop-spinnaker
